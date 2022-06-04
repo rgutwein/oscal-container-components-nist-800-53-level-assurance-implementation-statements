@@ -1,0 +1,31 @@
+const DIRECTORY = "/path/to/folder";
+const START_DATE = "2001-01-01T00:00:00.000Z";
+
+const fs = require("fs");
+const path = require("path");
+const moment = require("moment");
+
+const date = moment(START_DATE);
+
+// sort files by name (ascending)
+const sortedFiles = Array.from(fs.readdirSync(DIRECTORY)).sort((a, b) => {
+    const al = a.toLocaleLowerCase();
+    const bl = b.toLocaleLowerCase();
+    return al.localeCompare(bl);
+});
+
+// iterate through files changing their dates
+for (const fileName of sortedFiles) {
+    const fullName = path.join(DIRECTORY, fileName);
+
+    // change file timestamp (both access and modified dates)
+    const fd = fs.openSync(fullName, "r");
+    const time = date.toDate();
+    fs.futimesSync(fd, time, time);
+    fs.closeSync(fd);
+
+    console.info(`"${fileName}" done`);
+
+    date.add(1, "second");
+}
+@rgutwein
