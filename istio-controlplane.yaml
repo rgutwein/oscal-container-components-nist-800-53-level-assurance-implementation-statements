@@ -47,6 +47,10 @@ component definition:
         description: >-
         Istio leverages Keycloak for application account management - any accounts that are inactive for 35-days will automatically disable via policies applied within the 
         Keycloak SSO console and at the enterprise level adfs.
+      - uuid: 97eb9e80-e43a-11ec-8874-1d9d99fc0274
+        control-id: AC-2(4)
+        description: >-
+        Istio leverages authservice and keycloak which is configured to automatically audit account management capabilities.
       - uuid: 88f35da0-e42b-11ec-8874-1d9d99fc0274
         control-id: AC-3
         description: >-
