@@ -32,6 +32,21 @@ component definition:
          Istio leverages authservice which allows the use of an extenrral idtntiy OIDC provider for application login
           by configuring filter chain matching for hostname (headers) for applications.  This control can then
           be inherited by the Identity Provider (i.e, adfs, oidc)
+      - uuid: 0a4dc790-e432-11ec-8874-1d9d99fc0274
+        control-id: AC-2(1)
+        description: >-
+        Application account management involves Keycloak for SSO into the applicable container services like Istio.
+      - uuid: 577277a0-e432-11ec-8874-1d9d99fc0274
+        control-id: AC-2(2)
+        description: >-
+        Istio leverages Keycloak for application account management functionality - temporary user accounts are prohibited as all accounts with access to Istio
+        are defined as privileged users. In the event a temporary user account needs to be created for an independent audit for example, the identity provider (adfs or oidc) 
+        has baked in policies to automatically remove temporary accounts within 72 hours. 
+      - uuid: c8313ad0-e432-11ec-8874-1d9d99fc0274
+        control-id: AC-2(3)
+        description: >-
+        Istio leverages Keycloak for application account management - any accounts that are inactive for 35-days will automatically disable via policies applied within the 
+        Keycloak SSO console and at the enterprise level adfs.
       - uuid: 88f35da0-e42b-11ec-8874-1d9d99fc0274
         control-id: AC-3
         description: >-
@@ -39,57 +54,65 @@ component definition:
           Istio is configured to only allow access to applications if they have a valid JWT, 
           denying access by default. Applications that do not use Authservice do not have these
            policies.
-      - uuid: D7717A9B-7604-45EF-8DCF-EE4DF0417F9C
+      - uuid: 64e281f0-e42d-11ec-8874-1d9d99fc0274
         control-id: AC-4
         description: >-
           All HTTP(S) connections into the system via Istio ingress gateways and throughout the system with Istio sidecars.
-      - uuid: 1D1E8705-F6EB-4A21-A24F-1DF7427BA491
+      - uuid: 6dcac7f0-e42d-11ec-8874-1d9d99fc0274
         control-id: AC-4.4
         description: >-
           All encrypted HTTPS connections are terminated at the istio ingress gateway.
-      - uuid: CD1315BF-91FE-490A-B6A6-5616690D78A8
+      - uuid: 7a5b2e60-e42d-11ec-8874-1d9d99fc0274
         control-id: AC-6.3
         description: >-
-          Can be configured with an "admin" gateway to restrict access to applications that only need sysadmin access. Not standard in BB itself though.
-      - uuid: 6109E09A-8279-44AB-8CA4-2051AF895648
+          Can be configured with an "admin" gateway to restrict access to applications that only need sysadmin access. 
+      - uuid: ae9ab070-e42c-11ec-8874-1d9d99fc0274
+        control-id: AC-7.a
+        description: >-
+        Istio is configured to limit three consectutive invalid logon attempts by a user during a 15-minute time period
+      - uuid: b3384d10-e42f-11ec-8874-1d9d99fc0274
+        control-id: AC-8.a, AC-8.b
+        description: >-
+        Istio leverages P1 Keycloak for SSO which displays the mandatory DoD Notice and Consent Banner before access is granted to the Istio components.
+      - uuid: 8722aa60-e42d-11ec-8874-1d9d99fc0274
         control-id: AC-14
         description: >-
           Istio RequestAuthentication and AuthorizationPolicies are applied after Authservice. Istio is configured to only allow access to applications if they have a valid JWT, denying access by default. Applications that do not use Authservice do not have these policies.
-      - uuid: 9B6BA674-E6ED-4FB6-B216-3C8733F36411
+      - uuid: 970437a0-e42d-11ec-8874-1d9d99fc0274
         control-id: AU-2
         description: >-
           Istio provides access logs for all HTTP network requests, including mission applications.
-      - uuid: D3CBC898-F938-4FAA-B1B1-2597A69B5600
+      - uuid: a266f380-e42d-11ec-8874-1d9d99fc0274
         control-id: AU-3
         description: >-
           By default, Istio uses the Common Log Format with additional information for access logs.
 
           The default configuration does not include the identity of individuals associated with the event.
-      - uuid: D01F6B2D-F18E-47E9-94DC-95C0B5675E13
+      - uuid: acfb3bd0-e42d-11ec-8874-1d9d99fc0274
         control-id: CM-5
         description: >-
           Configured via Kubernetes resources. Inherited from cluster and flux/ArgoCD.
-      - uuid: 6370B2DA-1E35-4916-8591-91FB9EDBE72B
+      - uuid: b6cf4160-e42d-11ec-8874-1d9d99fc0274
         control-id: CM-8
         description: >-
           Provides an inventory of all workloads (including mission apps) in the service mesh, viewable in Kiali. 
-      - uuid: AB9189FF-34E2-4D7E-8018-EB346C7AE967
+      - uuid: c5368ab0-e42d-11ec-8874-1d9d99fc0274
         control-id: CM-8.1
         description: >-
           Provides an inventory of all workloads (including mission apps) in the service mesh, viewable in Kiali. The inventory is automatically and continuously updated.
-      - uuid: A740C741-23B4-4ED9-937C-E0276A9B92EE
+      - uuid: ce1f1ed0-e42d-11ec-8874-1d9d99fc0274
         control-id: CM-8.2
         description: >-
           Provides an inventory of all workloads (including mission apps) in the service mesh, viewable in Kiali. The inventory is automatically and continuously updated.
-      - uuid: 61615706-5395-4168-8AD0-5C4ACBCC5D7E
+      - uuid: d9cd3b90-e42d-11ec-8874-1d9d99fc0274
         control-id: IA-2
         description: >-
           Istio RequestAuthentication and AuthorizationPolicies are applied after Authservice. Istio is configured to only allow access to applications if they have a valid JWT, denying access by default. Applications that do not use Authservice do not have these policies.
-      - uuid: 3004BB1D-0F50-48F1-ABFE-40CC522B1C15
+      - uuid: e61638c0-e42d-11ec-8874-1d9d99fc0274
         control-id: IA-4
         description: >-
           Istio uses Kubernetes namespaces and resource names to identifiy workloads in the service mesh. This provides management of identifiers for all services in the cluster.
-      - uuid: FE110D6B-CCB5-41E8-B2DE-287ED843D417
+      - uuid: edeb8820-e42d-11ec-8874-1d9d99fc0274
         control-id: IA-9
         description: >-
           Istio registers all workload identities in the service mesh. The identity is transmitted in the mTLS certificate when establishing communication between services, and is validated by Istio sidecars.
