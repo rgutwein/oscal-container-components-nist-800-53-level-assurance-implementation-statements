@@ -51,6 +51,14 @@ component definition:
         control-id: AC-2(4)
         description: >-
         Istio leverages authservice and keycloak which is configured to automatically audit account management capabilities.
+      - uuid: c00e46d0-e686-11ec-ae7b-9386b3efd726
+        control-id: AC-2(10)
+        description: >-
+        Is configured with AuthorizationPolicies to prevent the creation of shared/group accounts
+      - uuid: e6ce03f0-e686-11ec-ae7b-9386b3efd726
+        control-id: AC-2(11)
+        description: >-
+        Enforces usage conditions via AuithorizationPolicies
       - uuid: 88f35da0-e42b-11ec-8874-1d9d99fc0274
         control-id: AC-3
         description: >-
@@ -67,9 +75,14 @@ component definition:
         description: >-
           All encrypted HTTPS connections are terminated at the istio ingress gateway.
       - uuid: 7a5b2e60-e42d-11ec-8874-1d9d99fc0274
-        control-id: AC-6.3
+        control-id: AC-6.3, AC-6(8), AC-6(8), AC-6(10)
         description: >-
           Can be configured with an "admin" gateway to restrict access to applications that only need sysadmin access. 
+      - uuid: 634ae970-e687-11ec-ae7b-9386b3efd726
+        control-id: AC-6(9)
+        description: >-
+        Istio generates telemetry data on service requests in the form of logs. The various components of Istio, such as Envoy, Mixer, and Pilot, 
+        have their own logs that can help with monitoring.
       - uuid: ae9ab070-e42c-11ec-8874-1d9d99fc0274
         control-id: AC-7.a
         description: >-
@@ -78,10 +91,22 @@ component definition:
         control-id: AC-8.a, AC-8.b
         description: >-
         Istio leverages P1 Keycloak for SSO which displays the mandatory DoD Notice and Consent Banner before access is granted to the Istio components.
+      - uuid: 202398e0-e687-11ec-ae7b-9386b3efd726
+        control-id: AC-10
+        description: >-
+        Istio destination policy sets a limit of 100 connections and 1000 concurrent requests with no more than 10 req/connection to “reviews” service 
+        version “v1” backends.
       - uuid: 8722aa60-e42d-11ec-8874-1d9d99fc0274
         control-id: AC-14
         description: >-
-          Istio RequestAuthentication and AuthorizationPolicies are applied after Authservice. Istio is configured to only allow access to applications if they have a valid JWT, denying access by default. Applications that do not use Authservice do not have these policies.
+          Istio RequestAuthentication and AuthorizationPolicies are applied after Authservice. Istio is configured to only allow access to applications 
+          if they have a valid JWT, denying access by default. Applications that do not use Authservice do not have these policies.
+      - uuid: a9263670-e687-11ec-ae7b-9386b3efd726
+        control-id: AC-17(2)
+        description: >-
+        Gateway sidecar containers can be configured within istio with at least TLS 1.2. mTLS acts as its own certificate authority. 
+        This contrasts with standard TLS, in which the certificate authority is an external organization that checks if the certificate owner 
+        legitimately owns the associated domain (learn about TLS certificate validation).
       - uuid: 970437a0-e42d-11ec-8874-1d9d99fc0274
         control-id: AU-2
         description: >-
@@ -89,9 +114,8 @@ component definition:
       - uuid: a266f380-e42d-11ec-8874-1d9d99fc0274
         control-id: AU-3
         description: >-
-          By default, Istio uses the Common Log Format with additional information for access logs.
-
-          The default configuration does not include the identity of individuals associated with the event.
+          By default, Istio uses the Common Log Format with additional information for access logs. The default configuration does not include 
+          the identity of individuals associated with the event.
       - uuid: acfb3bd0-e42d-11ec-8874-1d9d99fc0274
         control-id: CM-5
         description: >-
