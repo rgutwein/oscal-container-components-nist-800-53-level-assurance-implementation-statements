@@ -2,8 +2,8 @@ component-definition:
   uuid: 555CC857-3D59-4DD2-A085-AB2FEECB27EC
   metadata: 
     title: Prisma Cloud Component
-    last-modified: '2021-10-19T12:00:00Z'
-    version: "20211019"
+    last-modified: '2022-11-19T12:00:00Z'
+    version: "20221117"
     oscal-version: 1.0.0
     parties:
       # Should be consistent across all of the packages, but where is ground truth?
