@@ -11,7 +11,7 @@ component-definition:
       type: organization
       name: Twistlock Container Scanning Component
       links:
-      - href: <https://p1.dso.mil>
+      - href: <https://{ Cluster.Name ].bip.va.gov>
         rel: website
   components:
   - uuid: 8E97B416-B6B8-40B3-8883-37B3F3AABED5
@@ -119,4 +119,4 @@ component-definition:
       - uuid: 4C73FE14-EDFA-4B4A-AAC6-CC5704A4E5DD
         title: Prisma Cloud package
         rlinks:
-          - href: https://repo1.dso.mil/platform-one/big-bang/apps/security-tools/twistlock
+          - href: https://{ Cluster.Name }.bip.va.gov/apps/security-tools/twistlock
